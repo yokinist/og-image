@@ -83,9 +83,9 @@ function getCss({
     }
 
     body.twitter {
-      height: calc(100vh - 220px);
+      height: calc(100vh - 200px);
       border: solid ${accentColor};
-      border-width: 110px 45px 110px 45px;
+      border-width: 100px 45px 100px 45px;
     }
 
     code {
