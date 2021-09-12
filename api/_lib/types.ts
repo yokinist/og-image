@@ -7,6 +7,5 @@ export interface ParsedRequest {
   siteTitle?: string;
   background?: string;
   foreground?: string;
-  accentColor?: string
   isTwitter?: boolean;
 }

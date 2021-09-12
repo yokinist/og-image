@@ -158,9 +158,8 @@ const App = (_: any, state: AppState, setState: SetState) => {
       siteTitle = "example.com",
       background = "#090719",
       foreground = "#FFFFFF",
-      accentColor = '#5a67d8',
       text = "テストテストテストテストテスト",
-      isTwitter = false,
+      isTwitter = true,
       showToast = false,
       messageToast = "",
       loading = true,
@@ -174,7 +173,6 @@ const App = (_: any, state: AppState, setState: SetState) => {
     url.searchParams.append("background", background);
     url.searchParams.append("foreground",
     foreground);
-    url.searchParams.append("accentColor", accentColor);
     url.searchParams.append('md', mdValue);
     url.searchParams.append('fontSize', fontSize);
     url.searchParams.append("isTwitter", isTwitterValue);

@@ -10,7 +10,6 @@ export function parseRequest(req: IncomingMessage) {
       siteTitle,
       background,
       foreground,
-      accentColor,
       md,
       isTwitter,
     } = query || {};
@@ -39,7 +38,6 @@ export function parseRequest(req: IncomingMessage) {
       siteTitle: typeof siteTitle === "string" ? siteTitle : '',
       background: typeof background === "string" ? background : "#090719",
       foreground: typeof foreground === "string" ? foreground : "#FFFFFF",
-      accentColor: typeof accentColor === "string" ? accentColor : "#5a67d8",
       isTwitter: isTwitter === "1" || isTwitter === "true",
     };
     return parsedRequest;

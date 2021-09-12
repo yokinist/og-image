@@ -28,9 +28,8 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
 function getCss({
   background,
   foreground,
-  accentColor,
   fontSize
-}: Pick<ParsedRequest, 'background' | 'foreground' | 'accentColor' | 'fontSize'>) {
+}: Pick<ParsedRequest, 'background' | 'foreground' | 'fontSize'>) {
   let currentBackground = background ?? "white";
   let currentForeground = foreground ?? "black";
   return `
@@ -78,13 +77,15 @@ function getCss({
         text-align: center;
         align-items: center;
         justify-content: center;
-        border: 45px solid ${accentColor};
-        padding: 0;
+        border: 45px solid;
+        border-image: url("https://user-images.githubusercontent.com/19779874/132986668-c0440a11-b1f5-43bf-a075-b868173b9df5.png");
+        border-image-slice: 1;
+        border-image-repeat: stretch;
+        padding: 0 !important;
     }
 
     body.twitter {
       height: calc(100vh - 200px);
-      border: solid ${accentColor};
       border-width: 100px 45px 100px 45px;
     }
 
@@ -150,7 +151,7 @@ function getCss({
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const { text, background, foreground, md, fontSize, siteTitle, accentColor, isTwitter } =
+  const { text, background, foreground, md, fontSize, siteTitle, isTwitter } =
     parsedReq;
   return `<!DOCTYPE html>
 <html>
@@ -161,7 +162,6 @@ export function getHtml(parsedReq: ParsedRequest) {
         ${getCss({
           background,
           foreground,
-          accentColor,
           fontSize
         })}
     </style>
