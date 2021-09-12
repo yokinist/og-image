@@ -30,7 +30,7 @@ function getCss({
   foreground,
   accentColor,
   fontSize
-}: Pick<ParsedRequest, 'background' | 'foreground' | 'accentColor' |  'fontSize'>) {
+}: Pick<ParsedRequest, 'background' | 'foreground' | 'accentColor' | 'fontSize'>) {
   let currentBackground = background ?? "white";
   let currentForeground = foreground ?? "black";
   return `
@@ -70,6 +70,7 @@ function getCss({
         font-weight: normal;
         src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
       }
+
     body {
         background: ${currentBackground};
         height: calc(100vh - 90px);
@@ -80,6 +81,13 @@ function getCss({
         border: 45px solid ${accentColor};
         padding: 0;
     }
+
+    .twitter {
+      height: calc(100vh - 230px) !important;
+      border: solid ${accentColor} !important;
+      border-width: 115px 45px 115px 45px !important;
+    }
+
     code {
         color: #D400FF;
         font-family: 'Vera';
@@ -128,7 +136,7 @@ function getCss({
       color: ${foreground};
       line-height: 1.8;
       font-size: 64px;
-      width: 80%;
+      width: 100%;
       margin: 0 auto;
       justify-content: between;
     }
@@ -142,7 +150,7 @@ function getCss({
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const { text, background, foreground, md, fontSize, siteTitle, accentColor } =
+  const { text, background, foreground, md, fontSize, siteTitle, accentColor, isTwitter } =
     parsedReq;
   return `<!DOCTYPE html>
 <html>
@@ -154,19 +162,19 @@ export function getHtml(parsedReq: ParsedRequest) {
           background,
           foreground,
           accentColor,
-          fontSize,
+          fontSize
         })}
     </style>
-    <body>
-        <div class="wrapper">
-            <div class="heading">${emojify(
-              md ? marked(text) : sanitizeHtml(text)
-            )}
-            </div>
-            <div class="footer">
-              <p class="site">${siteTitle}</p>
-            </div>
+    <body class=${isTwitter ? 'twitter' : ''}>
+      <div class="wrapper">
+        <div class="heading">${emojify(
+          md ? marked(text) : sanitizeHtml(text)
+        )}
         </div>
+        <div class="footer">
+          <p class="site">${siteTitle}</p>
+        </div>
+      </div>
     </body>
 </html>`;
 }

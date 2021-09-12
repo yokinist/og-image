@@ -258,7 +258,7 @@ label {
     height: 60px;
     align-items: center;
     justify-content: space-between;
-    
+
     box-shadow: 0 4px 9px rgba(0,0,0,0.12);
     font-size: 14px;
     display: flex;
@@ -307,7 +307,7 @@ img {
 
 @media (max-width: 900px) {
     .split {
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
     }
 
     .field-label {

@@ -160,6 +160,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
       foreground = "#FFFFFF",
       accentColor = '#5a67d8',
       text = "テストテストテストテストテスト",
+      isTwitter = "true",
       showToast = false,
       messageToast = "",
       loading = true,
@@ -175,6 +176,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     url.searchParams.append("accentColor", accentColor);
     url.searchParams.append('md', mdValue);
     url.searchParams.append('fontSize', fontSize);
+    url.searchParams.append("isTwitter", isTwitter as string);
 
     return H('div',
         { className: 'split' },

@@ -5,8 +5,15 @@ import { ParsedRequest } from './types';
 export function parseRequest(req: IncomingMessage) {
     console.log('HTTP ' + req.url);
     const { pathname, query } = parse(req.url || '/', true);
-    const { fontSize, siteTitle, background, foreground, accentColor, md } =
-      query || {};
+    const {
+      fontSize,
+      siteTitle,
+      background,
+      foreground,
+      accentColor,
+      md,
+      isTwitter,
+    } = query || {};
 
     if (Array.isArray(fontSize)) {
         throw new Error('Expected a single fontSize');
@@ -33,6 +40,7 @@ export function parseRequest(req: IncomingMessage) {
       background: typeof background === "string" ? background : "#090719",
       foreground: typeof foreground === "string" ? foreground : "#FFFFFF",
       accentColor: typeof accentColor === "string" ? accentColor : "#5a67d8",
+      isTwitter: !!(isTwitter === "true")
     };
     return parsedRequest;
 }

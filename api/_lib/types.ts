@@ -8,4 +8,5 @@ export interface ParsedRequest {
   background?: string;
   foreground?: string;
   accentColor?: string
+  isTwitter?: boolean;
 }
