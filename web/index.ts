@@ -1,4 +1,4 @@
-import { ParsedRequest, Theme, FileType } from '../api/_lib/types';
+import { ParsedRequest, FileType } from '../api/_lib/types';
 const { H, R, copee } = (window as any);
 let timeout = -1;
 
@@ -111,11 +111,6 @@ const Toast = ({ show, message }: ToastProps) => {
     );
 }
 
-const themeOptions: DropdownOption[] = [
-    { text: 'Light', value: 'light' },
-    { text: 'Dark', value: 'dark' },
-];
-
 const fileTypeOptions: DropdownOption[] = [
     { text: 'PNG', value: 'png' },
     { text: 'JPEG', value: 'jpeg' },
@@ -159,8 +154,11 @@ const App = (_: any, state: AppState, setState: SetState) => {
     const {
       fileType = "png",
       fontSize = "100px",
-      theme = "dark",
       md = true,
+      siteTitle = "example.com",
+      background = "#090719",
+      foreground = "#FFFFFF",
+      accentColor = '#5a67d8',
       text = "テストテストテストテストテスト",
       showToast = false,
       messageToast = "",
@@ -170,7 +168,11 @@ const App = (_: any, state: AppState, setState: SetState) => {
     const mdValue = md ? '1' : '0';
     const url = new URL(window.location.origin);
     url.pathname = `${encodeURIComponent(text)}.${fileType}`;
-    url.searchParams.append('theme', theme);
+    url.searchParams.append("siteTitle", siteTitle);
+    url.searchParams.append("background", background);
+    url.searchParams.append("foreground",
+    foreground);
+    url.searchParams.append("accentColor", accentColor);
     url.searchParams.append('md', mdValue);
     url.searchParams.append('fontSize', fontSize);
 
@@ -179,16 +181,6 @@ const App = (_: any, state: AppState, setState: SetState) => {
         H('div',
             { className: 'pull-left' },
             H('div',
-                H(Field, {
-                    label: 'Theme',
-                    input: H(Dropdown, {
-                        options: themeOptions,
-                        value: theme,
-                        onchange: (val: Theme) => {
-                            setLoadingState({ theme: val });
-                        }
-                    })
-                }),
                 H(Field, {
                     label: 'File Type',
                     input: H(Dropdown, {
