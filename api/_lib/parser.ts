@@ -36,7 +36,7 @@ export function parseRequest(req: IncomingMessage) {
       text: decodeURIComponent(text),
       md: md === "1" || md === "true",
       fontSize: fontSize || "96px",
-      siteTitle: typeof siteTitle === "string" ? siteTitle : "example.com",
+      siteTitle: typeof siteTitle === "string" ? siteTitle : '',
       background: typeof background === "string" ? background : "#090719",
       foreground: typeof foreground === "string" ? foreground : "#FFFFFF",
       accentColor: typeof accentColor === "string" ? accentColor : "#5a67d8",

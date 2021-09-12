@@ -4,7 +4,7 @@ export interface ParsedRequest {
   text: string;
   md: boolean;
   fontSize: string;
-  siteTitle: string;
+  siteTitle?: string;
   background?: string;
   foreground?: string;
   accentColor?: string

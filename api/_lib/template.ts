@@ -172,7 +172,7 @@ export function getHtml(parsedReq: ParsedRequest) {
         )}
         </div>
         <div class="footer">
-          <p class="site">${siteTitle}</p>
+          <p class="site">${siteTitle ?? ''}</p>
         </div>
       </div>
     </body>
