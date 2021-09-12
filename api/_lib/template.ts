@@ -83,9 +83,14 @@ function getCss({
     }
 
     .twitter {
-      height: calc(100vh - 230px) !important;
-      border: solid ${accentColor} !important;
-      border-width: 115px 45px 115px 45px !important;
+      background: ${currentBackground};
+      height: calc(100vh - 230px);
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      border: solid ${accentColor};
+      border-width: 115px 45px 115px 45px;
     }
 
     code {
