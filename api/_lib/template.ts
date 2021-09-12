@@ -25,14 +25,14 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
   "base64"
 );
 
-function getCss(theme: string, fontSize: string) {
-  let background = "white";
-  let foreground = "black";
-
-  if (theme === "dark") {
-    background = "#090719";
-    foreground = "white";
-  }
+function getCss({
+  background,
+  foreground,
+  accentColor,
+  fontSize
+}: Pick<ParsedRequest, 'background' | 'foreground' | 'accentColor' |  'fontSize'>) {
+  let currentBackground = background ?? "white";
+  let currentForeground = foreground ?? "black";
   return `
     @font-face {
         font-family: 'noto-sans-cjk-jp';
@@ -71,13 +71,13 @@ function getCss(theme: string, fontSize: string) {
         src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
       }
     body {
-        background: ${background};
+        background: ${currentBackground};
         height: calc(100vh - 90px);
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
-        border: 45px solid #5a67d8;
+        border: 45px solid ${accentColor};
         padding: 0;
     }
     code {
@@ -116,7 +116,7 @@ function getCss(theme: string, fontSize: string) {
         font-size: ${sanitizeHtml(fontSize)};
         font-weight: bold;
         font-style: normal;
-        color: ${foreground};
+        color: ${currentForeground};
         line-height: 1.8;
         width: 80%;
         margin: 0 auto;
@@ -142,7 +142,7 @@ function getCss(theme: string, fontSize: string) {
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const { text, theme, md, fontSize, siteTitle } =
+  const { text, background, foreground, md, fontSize, siteTitle, accentColor } =
     parsedReq;
   return `<!DOCTYPE html>
 <html>
@@ -150,7 +150,12 @@ export function getHtml(parsedReq: ParsedRequest) {
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        ${getCss(theme, fontSize)}
+        ${getCss({
+          background,
+          foreground,
+          accentColor,
+          fontSize,
+        })}
     </style>
     <body>
         <div class="wrapper">
