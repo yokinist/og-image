@@ -276,6 +276,10 @@ label {
 img {
     max-width: 100%;
     transition: all 0.3s ease-in 0s;
+    /* for twitter ogp */
+    /* width: 438px;
+    height: 220px;
+    object-fit: cover; */
 }
 
 .image-wrapper {

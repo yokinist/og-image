@@ -82,15 +82,10 @@ function getCss({
         padding: 0;
     }
 
-    .twitter {
-      background: ${currentBackground};
-      height: calc(100vh - 230px);
-      display: flex;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
+    body.twitter {
+      height: calc(100vh - 240px);
       border: solid ${accentColor};
-      border-width: 115px 45px 115px 45px;
+      border-width: 120px 45px 120px 45px;
     }
 
     code {

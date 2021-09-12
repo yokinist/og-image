@@ -160,13 +160,14 @@ const App = (_: any, state: AppState, setState: SetState) => {
       foreground = "#FFFFFF",
       accentColor = '#5a67d8',
       text = "テストテストテストテストテスト",
-      isTwitter = "true",
+      isTwitter = false,
       showToast = false,
       messageToast = "",
       loading = true,
       overrideUrl = null,
     } = state;
     const mdValue = md ? '1' : '0';
+    const isTwitterValue = isTwitter ? "1" : "0";
     const url = new URL(window.location.origin);
     url.pathname = `${encodeURIComponent(text)}.${fileType}`;
     url.searchParams.append("siteTitle", siteTitle);
@@ -176,7 +177,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     url.searchParams.append("accentColor", accentColor);
     url.searchParams.append('md', mdValue);
     url.searchParams.append('fontSize', fontSize);
-    url.searchParams.append("isTwitter", isTwitter as string);
+    url.searchParams.append("isTwitter", isTwitterValue);
 
     return H('div',
         { className: 'split' },

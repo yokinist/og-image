@@ -40,7 +40,7 @@ export function parseRequest(req: IncomingMessage) {
       background: typeof background === "string" ? background : "#090719",
       foreground: typeof foreground === "string" ? foreground : "#FFFFFF",
       accentColor: typeof accentColor === "string" ? accentColor : "#5a67d8",
-      isTwitter: !!(isTwitter === "true")
+      isTwitter: isTwitter === "1" || isTwitter === "true",
     };
     return parsedRequest;
 }
