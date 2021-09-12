@@ -118,7 +118,7 @@ function getCss({
         font-style: normal;
         color: ${currentForeground};
         line-height: 1.8;
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
 
