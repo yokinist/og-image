@@ -6,14 +6,6 @@ const twemoji = require("twemoji");
 const twOptions = { folder: "svg", ext: ".svg" };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const noto = readFileSync(
-  `${__dirname}/../_fonts/NotoSansSC-Regular.woff2`
-).toString("base64");
-
-const notoBold = readFileSync(
-  `${__dirname}/../_fonts/NotoSansSC-Bold.woff2`
-).toString("base64");
-
 const rglr = readFileSync(
   `${__dirname}/../_fonts/Inter-Regular.woff2`
 ).toString("base64");
@@ -32,18 +24,7 @@ function getCss({
   let currentBackground = background ?? "white";
   let currentForeground = foreground ?? "black";
   return `
-    @font-face {
-        font-family: 'Noto Sans SC';
-        font-style:  normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${noto}) format('woff2');
-    }
-    @font-face {
-        font-family: 'Noto Sans SC';
-        font-style:  normal;
-        font-weight: bold;
-        src: url(data:font/woff2;charset=utf-8;base64,${notoBold}) format('woff2');
-    }
+   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
     @font-face {
         font-family: 'Inter';
         font-style:  normal;
