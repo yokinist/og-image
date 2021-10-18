@@ -6,13 +6,12 @@ const twemoji = require("twemoji");
 const twOptions = { folder: "svg", ext: ".svg" };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-
 const noto = readFileSync(
-  `${__dirname}/../_fonts/NotoSansCJKjp-Regular.woff2`
+  `${__dirname}/../_fonts/NotoSansSC-Regular.woff2`
 ).toString("base64");
 
 const notoBold = readFileSync(
-  `${__dirname}/../_fonts/NotoSansCJKjp-Bold.woff2`
+  `${__dirname}/../_fonts/NotoSansSC-Bold.woff2`
 ).toString("base64");
 
 const rglr = readFileSync(
@@ -28,19 +27,19 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
 function getCss({
   background,
   foreground,
-  fontSize
-}: Pick<ParsedRequest, 'background' | 'foreground' | 'fontSize'>) {
+  fontSize,
+}: Pick<ParsedRequest, "background" | "foreground" | "fontSize">) {
   let currentBackground = background ?? "white";
   let currentForeground = foreground ?? "black";
   return `
     @font-face {
-        font-family: 'noto-sans-cjk-jp';
+        font-family: 'Noto Sans SC';
         font-style:  normal;
         font-weight: normal;
         src: url(data:font/woff2;charset=utf-8;base64,${noto}) format('woff2');
     }
     @font-face {
-        font-family: 'noto-sans-cjk-jp';
+        font-family: 'Noto Sans SC';
         font-style:  normal;
         font-weight: bold;
         src: url(data:font/woff2;charset=utf-8;base64,${notoBold}) format('woff2');
@@ -121,7 +120,7 @@ function getCss({
     }
 
     .heading {
-        font-family: 'noto-sans-cjk-jp', 'Inter', sans-serif;
+        font-family: 'Noto Sans SC', 'Inter', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-weight: bold;
         font-style: normal;
@@ -162,17 +161,15 @@ export function getHtml(parsedReq: ParsedRequest) {
         ${getCss({
           background,
           foreground,
-          fontSize
+          fontSize,
         })}
     </style>
-    <body class=${isTwitter ? 'twitter' : ''}>
+    <body class=${isTwitter ? "twitter" : ""}>
       <div class="wrapper">
-        <div class="heading">${emojify(
-          md ? marked(text) : sanitizeHtml(text)
-        )}
+        <div class="heading">${emojify(md ? marked(text) : sanitizeHtml(text))}
         </div>
         <div class="footer">
-          <p class="site">${siteTitle ?? ''}</p>
+          <p class="site">${siteTitle ?? ""}</p>
         </div>
       </div>
     </body>
