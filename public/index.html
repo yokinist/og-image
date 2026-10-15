@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>og-image</title>
+    <meta name="description" content="Open Graph images on the fly: put the title in the URL and get a 1200×630 PNG." />
+    <meta property="og:image" content="https://simple-og-image.vercel.app/og-image.png?description=Open%20Graph%20images%20on%20the%20fly&siteTitle=simple-og-image.vercel.app" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #fafafa;
+        --fg: #18181b;
+        --muted: #71717a;
+        --line: #e4e4e7;
+        --field: #ffffff;
+        --accent: #0284c7;
+        font-family: Inter, system-ui, -apple-system, "Hiragino Sans", sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #09090b;
+          --fg: #fafafa;
+          --muted: #a1a1aa;
+          --line: #27272a;
+          --field: #18181b;
+          --accent: #38bdf8;
+        }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--fg); }
+      main { max-width: 1120px; margin: 0 auto; padding: 40px 16px 64px; }
+      header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+      h1 { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
+      header p { margin: 0; color: var(--muted); }
+      a { color: var(--accent); }
+      .layout { display: grid; gap: 32px; margin-top: 32px; }
+      @media (min-width: 900px) { .layout { grid-template-columns: 340px 1fr; align-items: start; } .preview { position: sticky; top: 24px; } }
+      form { display: grid; gap: 14px; }
+      label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+      .name small { margin-left: 4px; color: var(--muted); font-size: 12px; font-weight: 400; }
+      input, select, textarea {
+        width: 100%; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px;
+        background: var(--field); color: inherit; font: inherit; font-size: 14px; font-weight: 400;
+      }
+      textarea { resize: vertical; min-height: 64px; }
+      input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+        outline: 2px solid var(--accent); outline-offset: 1px;
+      }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+      .image {
+        position: relative; aspect-ratio: 1200 / 630; border: 1px solid var(--line);
+        border-radius: 12px; overflow: hidden; background: var(--field);
+      }
+      .image img { display: block; width: 100%; height: 100%; transition: opacity 0.2s; }
+      .image.loading img { opacity: 0.5; }
+      .url { display: flex; gap: 8px; margin-top: 12px; }
+      .url input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+      button {
+        flex: none; padding: 0 16px; border: 0; border-radius: 8px; background: var(--fg); color: var(--bg);
+        font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+      }
+      .hint { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>og-image</h1>
+        <p>Open Graph images from a URL. <a href="https://github.com/yokinist/og-image#readme">Parameters and source</a></p>
+      </header>
+      <div class="layout">
+        <form id="form">
+          <label><span class="name">Title</span><input name="title" value="Next.js と Notion API でブログを作り直した 🚀" required /></label>
+          <label><span class="name">Description <small>one or two lines under the title</small></span><textarea name="description"></textarea></label>
+          <div class="row">
+            <label><span class="name">Site title</span><input name="siteTitle" value="yokinist.me" /></label>
+            <label><span class="name">Logo <small>https</small></span><input name="logo" type="url" placeholder="https://…/logo.png" /></label>
+          </div>
+          <div class="row">
+            <label><span class="name">Author</span><input name="author" value="yokinist" /></label>
+            <label><span class="name">Date</span><input name="date" value="2026-10-15" /></label>
+          </div>
+          <div class="row">
+            <label><span class="name">Layout</span><select name="layout">
+                <option value="">standard</option>
+                <option>center</option>
+                <option>split</option>
+              </select>
+            </label>
+            <label><span class="name">Theme</span><select name="theme">
+                <option value="">dark</option>
+                <option>light</option>
+              </select>
+            </label>
+          </div>
+          <div class="row3">
+            <label><span class="name">Accent</span><input name="accent" placeholder="theme" /></label>
+            <label><span class="name">Background</span><input name="background" placeholder="theme" /></label>
+            <label><span class="name">Text</span><input name="foreground" placeholder="theme" /></label>
+          </div>
+          <label><span class="name">Largest title size <small id="size">72px</small></span><input name="fontSize" type="range" min="32" max="128" step="4" value="72" /></label>
+        </form>
+        <section class="preview" aria-label="Preview">
+          <div class="image" id="frame"><img id="image" alt="The generated image" width="1200" height="630" /></div>
+          <div class="url">
+            <input id="url" readonly aria-label="Image URL" />
+            <button type="button" id="copy">Copy</button>
+          </div>
+          <p class="hint">Colors take a hex, rgb() or hsl() value, or a color name. Images are cached for a year, so a URL keeps its image.</p>
+        </section>
+      </div>
+    </main>
+    <script>
+      const form = document.getElementById("form");
+      const image = document.getElementById("image");
+      const frame = document.getElementById("frame");
+      const url = document.getElementById("url");
+
+      // The title goes in the path; the rest as query parameters, left out
+      // when empty or at their defaults
+      const build = () => {
+        const data = new FormData(form);
+        const params = new URLSearchParams();
+        for (const [key, value] of data) {
+          const v = String(value).trim();
+          if (key === "title" || !v || (key === "fontSize" && v === "72")) continue;
+          params.set(key, v);
+        }
+        const title = String(data.get("title")).trim() || "Hello";
+        const query = params.size ? `?${params}` : "";
+        return `${location.origin}/${encodeURIComponent(title)}.png${query}`;
+      };
+
+      let timer;
+      const update = () => {
+        document.getElementById("size").textContent = `${form.fontSize.value}px`;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const next = build();
+          url.value = next;
+          if (image.src === next) return;
+          frame.classList.add("loading");
+          image.src = next;
+        }, 400);
+      };
+      image.addEventListener("load", () => frame.classList.remove("loading"));
+      image.addEventListener("error", () => frame.classList.remove("loading"));
+      form.addEventListener("input", update);
+
+      document.getElementById("copy").addEventListener("click", async (event) => {
+        await navigator.clipboard.writeText(url.value);
+        event.target.textContent = "Copied";
+        setTimeout(() => { event.target.textContent = "Copy"; }, 1500);
+      });
+
+      update();
+    </script>
+  </body>
+</html>

@@ -6,7 +6,7 @@ Open Graph images on the fly: put the title in the URL and get a 1200×630 PNG.
 https://simple-og-image.vercel.app/<title>.png?siteTitle=yokinist.me
 ```
 
-Drawn with [Satori](https://github.com/vercel/satori) and [resvg](https://github.com/yisibl/resvg-js), so no browser runs. Text is set in Inter and Noto Sans JP, fetched from Google Fonts with only the characters used, and emoji are [Twemoji](https://github.com/jdecked/twemoji).
+Try the parameters at [simple-og-image.vercel.app](https://simple-og-image.vercel.app). Drawn with [Satori](https://github.com/vercel/satori) and [resvg](https://github.com/yisibl/resvg-js), so no browser runs. Text is set in Inter and Noto Sans JP, fetched from Google Fonts with only the characters used, and emoji are [Twemoji](https://github.com/jdecked/twemoji).
 
 ## Parameters
 
