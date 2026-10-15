@@ -26,15 +26,37 @@ Values that are invalid fall back to the defaults. `md` and `isTwitter`, from th
 
 ## Examples
 
+Each image below is the URL above it, drawn by the live service. Try your own at [simple-og-image.vercel.app](https://simple-og-image.vercel.app).
+
+### standard
+
+The default: dark, with a description and a byline.
+
 ```
-/Hello%20world.png?siteTitle=yokinist.me&author=yokinist&date=2026-10-15
-/x.png?title=Hello&layout=center&theme=light&accent=%23f97316
-/x.png?title=Hello&layout=split&logo=https://github.com/yokinist.png
+/Open Graph images from a URL 🖼️.png?siteTitle=og-image&description=Put the title in the path and get a 1200×630 PNG&author=yokinist&date=2026-10-15
 ```
 
-| standard | center | split |
-| --- | --- | --- |
-| ![](https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?siteTitle=yokinist.me&author=yokinist&date=2026-10-15) | ![](https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?siteTitle=yokinist.me&author=yokinist&date=2026-10-15&layout=center) | ![](https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?siteTitle=yokinist.me&date=2026-10-15&layout=split&logo=https://github.com/yokinist.png) |
+<img src="https://simple-og-image.vercel.app/Open%20Graph%20images%20from%20a%20URL%20%F0%9F%96%BC%EF%B8%8F.png?siteTitle=og-image&description=Put%20the%20title%20in%20the%20path%20and%20get%20a%201200%C3%97630%20PNG&author=yokinist&date=2026-10-15" width="600" alt="standard">
+
+### center
+
+`layout=center`, `theme=light` and an orange `accent`.
+
+```
+/Notion API でブログを作る.png?layout=center&theme=light&accent=%23f97316&siteTitle=yokinist.me&author=yokinist&date=2026年10月15日
+```
+
+<img src="https://simple-og-image.vercel.app/Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8B.png?layout=center&theme=light&accent=%23f97316&siteTitle=yokinist.me&author=yokinist&date=2026%E5%B9%B410%E6%9C%8815%E6%97%A5" width="600" alt="center">
+
+### split
+
+`layout=split` with a `logo`, which also fills the panel on the right.
+
+```
+/Next.js と Notion API でブログを作り直した.png?layout=split&accent=%2310b981&logo=https://github.com/yokinist.png&siteTitle=yokinist.me&description=react-notion-x から公式 API に移行した記録&date=2026-10-15
+```
+
+<img src="https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?layout=split&accent=%2310b981&logo=https%3A%2F%2Fgithub.com%2Fyokinist.png&siteTitle=yokinist.me&description=react-notion-x%20%E3%81%8B%E3%82%89%E5%85%AC%E5%BC%8F%20API%20%E3%81%AB%E7%A7%BB%E8%A1%8C%E3%81%97%E3%81%9F%E8%A8%98%E9%8C%B2&date=2026-10-15" width="600" alt="split">
 
 Responses are cached for a year, so a URL keeps its image. Change a parameter to get a new one.
 
