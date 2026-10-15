@@ -8,9 +8,9 @@ const samples: Record<string, string> = {
   legacy:
     "/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?md=1&fontSize=96px&background=%2318181b&foreground=%23fafafa&siteTitle=yokinist.me",
   standard:
-    "/x.png?title=Next.js と Notion API でブログを作り直した 🚀&siteTitle=yokinist.me&description=react-notion-x から公式 API と React Server Components に移行した記録&author=yokinist&date=2026-10-15",
+    "/x.png?title=Next.js と Notion API でブログを作り直した 🚀&siteTitle=yokinist.me&description=react-notion-x から公式 API と React Server Components に移行した記録&author=yokinist&date=2026-10-15&layout=standard",
   "standard-light":
-    "/x.png?title=Building a blog on the official Notion API with React Server Components&siteTitle=notion-kit&author=yokinist&date=Oct 15, 2026&theme=light",
+    "/x.png?title=Building a blog on the official Notion API with React Server Components&siteTitle=notion-kit&author=yokinist&date=Oct 15, 2026&theme=light&layout=standard",
   center:
     "/x.png?title=Next.js と Notion API でブログを作り直した 🚀&siteTitle=yokinist.me&author=yokinist&date=2026-10-15&layout=center",
   "center-light":

@@ -4,7 +4,6 @@
     "lib": ["es2023", "dom"],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,

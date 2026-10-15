@@ -1,6 +1,6 @@
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
-import { Card, HEIGHT, WIDTH } from "./card.js";
+import { card, HEIGHT, WIDTH } from "./card.js";
 import { loadEmoji } from "./emoji.js";
 import { loadFonts } from "./fonts.js";
 import type { CardOptions } from "./options.js";
@@ -15,7 +15,7 @@ export const render = async (options: CardOptions) => {
     options.date,
     "·",
   ].join("");
-  const svg = await satori(<Card options={options} />, {
+  const svg = await satori(card(options), {
     width: WIDTH,
     height: HEIGHT,
     fonts: await loadFonts(text),
