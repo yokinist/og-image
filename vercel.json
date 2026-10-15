@@ -1,1 +1,10 @@
-{ "rewrites": [{ "source": "/(.+)", "destination": "/api" }] }
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://github.com/yokinist/og-image#readme",
+      "permanent": false
+    }
+  ],
+  "rewrites": [{ "source": "/(.+)", "destination": "/api" }]
+}
