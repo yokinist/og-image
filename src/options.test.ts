@@ -28,7 +28,7 @@ describe("parseOptions", () => {
   it("uses each theme's colors unless they are given", () => {
     expect(parse("/a.png")).toMatchObject({
       theme: "dark",
-      layout: "standard",
+      layout: "split",
     });
     const light = parse("/a.png?theme=light");
     const dark = parse("/a.png?theme=dark");
@@ -62,7 +62,7 @@ describe("parseOptions", () => {
 
     expect(options.background).toBe(defaults.background);
     expect(options.accent).toBe(defaults.accent);
-    expect(options.layout).toBe("standard");
+    expect(options.layout).toBe("split");
     expect(options.logo).toBeUndefined();
     expect(options.fontSize).toBe(128);
   });
