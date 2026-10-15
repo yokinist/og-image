@@ -1,68 +1,54 @@
-<a href="https://vercel.com/new/project?template=vercel/og-image"><img width="128" src="https://vercel.com/button" align="right"></a>
+# og-image
 
-# [Open Graph Image as a Service](https://og-image.vercel.app)
+Open Graph images on the fly: put the title in the URL and get a 1200×630 PNG.
 
-<a href="https://twitter.com/vercel">
-    <img align="right" src="https://og-image.vercel.app/tweet.png" height="300" />
-</a>
-
-Serverless service that generates dynamic Open Graph images that you can embed in your `<meta>` tags.
-
-For each keystroke, headless chromium is used to render an HTML page and take a screenshot of the result which gets cached.
-
-See the image embedded in the tweet for a real use case.
-
-
-## What is an Open Graph Image?
-
-Have you ever posted a hyperlink to Twitter, Facebook, or Slack and seen an image popup?
-How did your social network know how to "unfurl" the URL and get an image?
-The answer is in your `<head>`.
-
-The [Open Graph protocol](http://ogp.me) says you can put a `<meta>` tag in the `<head>` of a webpage to define this image.
-
-It looks like the following:
-
-```html
-<head>
-  <title>Title</title>
-  <meta property="og:image" content="http://example.com/logo.jpg" />
-</head>
+```
+https://simple-og-image.vercel.app/<title>.png?siteTitle=yokinist.me
 ```
 
-## Why use this service?
+Drawn with [Satori](https://github.com/vercel/satori) and [resvg](https://github.com/yisibl/resvg-js), so no browser runs. Text is set in Inter and Noto Sans JP, fetched from Google Fonts with only the characters used, and emoji are [Twemoji](https://github.com/jdecked/twemoji).
 
-The short answer is that it would take a long time to painstakingly design an image for every single blog post and every single documentation page. And we don't want the exact same image for every blog post because that wouldn't make the article stand out when it was shared to Twitter. 
+## Parameters
 
-That's where `og-image.vercel.app` comes in. We can simply pass the title of our blog post to our generator service and it will generate the image for us on the fly!
+| Parameter | Default | |
+| --- | --- | --- |
+| `title` | the path | The title, from `/<title>.png` or `?title=`. Long titles shrink to fit three lines (two with a description). |
+| `siteTitle` | | Shown above the title, with a dot of the accent color or the logo. |
+| `description` | | One or two lines under the title. |
+| `author`, `date` | | Shown at the bottom, as given. |
+| `logo` | | An `https` image next to the site title. |
+| `layout` | `standard` | `standard`, `center` or `split`. |
+| `theme` | `dark` | `dark` or `light`; sets the colors below. |
+| `background`, `foreground`, `accent` | from the theme | A hex, `rgb()`/`hsl()` or color keyword. Encode `#` as `%23`. |
+| `fontSize` | `72` | The largest the title gets, 32 to 128 (`96px` works too). |
 
-It looks like the following:
+Values that are invalid fall back to the defaults. `md` and `isTwitter`, from the original service, are accepted and ignored.
 
-```html
-<head>
-  <title>Hello World</title>
-  <meta property="og:image" content="https://og-image.vercel.app/Hello%20World.png" />
-</head>
+## Examples
+
+```
+/Hello%20world.png?siteTitle=yokinist.me&author=yokinist&date=2026-10-15
+/x.png?title=Hello&layout=center&theme=light&accent=%23f97316
+/x.png?title=Hello&layout=split&logo=https://github.com/yokinist.png
 ```
 
-Now try changing the text `Hello%20World` to the title of your choosing and watch the magic happen ✨
+| standard | center | split |
+| --- | --- | --- |
+| ![](https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?siteTitle=yokinist.me&author=yokinist&date=2026-10-15) | ![](https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?siteTitle=yokinist.me&author=yokinist&date=2026-10-15&layout=center) | ![](https://simple-og-image.vercel.app/Next.js%20%E3%81%A8%20Notion%20API%20%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%97%E3%81%9F.png?siteTitle=yokinist.me&date=2026-10-15&layout=split&logo=https://github.com/yokinist.png) |
 
-## Deploy your own
+Responses are cached for a year, so a URL keeps its image. Change a parameter to get a new one.
 
-You'll want to fork this repository and deploy your own image generator.
+## Development
 
-1. Click the fork button at the top right of GitHub
-2. Clone the repo to your local machine with `git clone URL_OF_FORKED_REPO_HERE`
-3. Change directory with `cd og-image`
-4. Make changes by swapping out images, changing colors, etc (see [contributing](https://github.com/vercel/og-image/blob/main/CONTRIBUTING.md) for more info)
-5. Remove all configuration inside `vercel.json` besides `rewrites`
-6. Run locally with `vercel dev` and visit [localhost:3000](http://localhost:3000)  (if nothing happens, run `npm install -g vercel`)
-7. Deploy to the cloud by running `vercel` and you'll get a unique URL
-8. Setup [GitHub](https://vercel.com/github) to auto-deploy on push
+```bash
+npm install
+npm run preview  # draws sample cards into preview/
+npm test
+vercel dev       # the API at localhost:3000
+```
 
-Once you have an image generator that sparks joy, you can setup [automatic GitHub](https://vercel.com/github) deployments so that pushing to master will deploy to production! 🚀
+The card is `src/card.tsx`; the parameters are read in `src/options.ts`. Deploys to Vercel as is, on Node 24.
 
-## Authors
+## License
 
-- Steven ([@styfle](https://twitter.com/styfle)) - [Vercel](https://vercel.com)
-- Evil Rabbit ([@evilrabbit](https://twitter.com/evilrabbit_)) - [Vercel](https://vercel.com)
+MIT. Forked from [vercel/og-image](https://github.com/vercel/og-image).
