@@ -75,7 +75,7 @@ export const parseOptions = (url: URL): CardOptions => {
     date: text(q.get("date"), 40),
     logo: https(q.get("logo")),
     theme,
-    layout: layout && LAYOUTS.includes(layout) ? layout : "split",
+    layout: layout && LAYOUTS.includes(layout) ? layout : "standard",
     background: color(q.get("background")) ?? defaults.background,
     foreground: color(q.get("foreground")) ?? defaults.foreground,
     accent: color(q.get("accent")) ?? defaults.accent,

@@ -17,7 +17,7 @@ Drawn with [Satori](https://github.com/vercel/satori) and [resvg](https://github
 | `description` | | One or two lines under the title. |
 | `author`, `date` | | Shown at the bottom, as given. |
 | `logo` | | An `https` image next to the site title. |
-| `layout` | `split` | `split`, `standard` or `center`. |
+| `layout` | `standard` | `standard`, `center` or `split`. |
 | `theme` | `dark` | `dark` or `light`; sets the colors below. |
 | `background`, `foreground`, `accent` | from the theme | A hex, `rgb()`/`hsl()` or color keyword. Encode `#` as `%23`. |
 | `fontSize` | `72` | The largest the title gets, 32 to 128 (`96px` works too). |
